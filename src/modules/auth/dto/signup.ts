@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 import { User } from '@prisma/client';
 
-export class SignupDto implements Omit<User, 'id'> {
+export class SignupDto implements OmitId<User> {
   @IsString()
   @IsNotEmpty()
   name: string;
