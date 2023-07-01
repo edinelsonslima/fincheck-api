@@ -3,12 +3,12 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { SigninDto } from './dto/signin';
-import { UsersRepository } from 'src/shared/repositories/users.repositories';
-import { compare, hash } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
-import { SignupDto } from './dto/signup';
 import { Prisma } from '@prisma/client';
+import { compare, hash } from 'bcryptjs';
+import { UsersRepository } from 'src/shared/repositories/users.repositories';
+import { SigninDto } from './dto/signin';
+import { SignupDto } from './dto/signup';
 
 const categories: Prisma.Enumerable<Prisma.CategoryCreateManyUserInput> = [
   // Income
