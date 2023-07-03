@@ -1,5 +1,5 @@
 import { BankAccount, BankAccountType } from '@prisma/client';
-import { IsHexColor, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsEnum, IsHexColor, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateBankAccountDto
   implements OmitIdAndKeys<BankAccount, 'userId'>
@@ -17,5 +17,7 @@ export class CreateBankAccountDto
   @IsNotEmpty()
   initialBalance: number;
 
+  @IsNotEmpty()
+  @IsEnum(BankAccountType)
   type: BankAccountType;
 }
