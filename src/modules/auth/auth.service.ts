@@ -6,7 +6,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { Prisma } from '@prisma/client';
 import { compare, hash } from 'bcryptjs';
-import { UsersRepository } from 'src/shared/repositories/users.repositories';
+import { UsersRepository } from 'src/shared/database/repositories/users.repositories';
 import { SigninDto } from './dto/signin';
 import { SignupDto } from './dto/signup';
 
