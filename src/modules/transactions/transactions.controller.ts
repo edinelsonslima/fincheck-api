@@ -12,7 +12,10 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { TransactionType } from '@prisma/client';
 import { ActiveUserId } from 'src/shared/decorators/active-user-id';
+import { OptionalParseEnumPipe } from 'src/shared/pipes/optional-parse-enum-pipe';
+import { OptionalParseUUIDPipe } from 'src/shared/pipes/optional-parse-uuid-pipe';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { TransactionsService } from './services/transactions.service';
@@ -30,12 +33,20 @@ export class TransactionsController {
   }
 
   @Get()
-  findAllByUserId(
+  async findAllByUserId(
     @ActiveUserId() userId: string,
     @Query('year', ParseIntPipe) year: number,
     @Query('month', ParseIntPipe) month: number,
+    @Query('bankAccountId', OptionalParseUUIDPipe) bankAccountId?: string,
+    @Query('type', new OptionalParseEnumPipe(TransactionType))
+    type?: TransactionType,
   ) {
-    return this.transactionsService.findAllByUserId(userId, { year, month });
+    return this.transactionsService.findAllByUserId(userId, {
+      type,
+      year,
+      month,
+      bankAccountId,
+    });
   }
 
   @Put(':transactionId')
