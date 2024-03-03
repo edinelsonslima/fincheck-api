@@ -58,6 +58,11 @@ export class TransactionsService {
             icon: true,
           },
         },
+        bankAccount: {
+          select: {
+            color: true,
+          },
+        },
       },
     });
   }
